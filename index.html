@@ -52,7 +52,8 @@ body { font-family: 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif; ba
 .row-subtotal .subtotal-value { color: #2563eb; font-size: 16px; }
 .grand-total { background: #f1f5f9; border-radius: 16px; padding: 20px 24px; margin-top: 8px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; border: 1px solid #e2e8f0; }
 .grand-total .gt-label { font-size: 15px; font-weight: 600; color: #475569; }
-.grand-total .gt-value { font-size: 30px; font-weight: 800; color: #ea580c; }
+.grand-total .gt-label { font-size: 20px; font-weight: 700; color: #dc2626; letter-spacing: 0.5px; }
+.grand-total .gt-value { font-size: 40px; font-weight: 800; color: #dc2626; }
 .grand-total .gt-value .currency { font-size: 20px; font-weight: 600; margin-right: 2px; }
 .submit-section { margin-top: 24px; text-align: right; }
 .submit-section .submit-note { margin-top: 10px; font-size: 13px; color: #64748b; }
@@ -84,6 +85,7 @@ body { font-family: 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif; ba
 <div class="app-container" id="app">
 <header class="header">
 <h1>Titatec Lighting <span>Quote Estimator</span></h1>
+<div style="font-size:18px;color:#64748b;font-weight:500;letter-spacing:0.5px;">Professional LED Lighting for Retail Shelving</div>
 </header>
 <div class="store-section" id="storeSection">
 <label for="storeName">Store Name:</label>
@@ -103,12 +105,25 @@ body { font-family: 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif; ba
 <div id="rowsContainer"></div>
 <div style="margin-top:16px;"><button class="btn btn-secondary" id="btnAddRow">+ Add Row</button></div>
 <div class="grand-total">
-<div class="gt-label">Grand Total</div>
-<div class="gt-value"><span class="currency">$</span><span id="grandTotal">0.00</span></div>
+  <div class="gt-label">Grand Total</div>
+  <div class="gt-value"><span class="currency">$</span><span id="grandTotal">0.00</span></div>
+</div>
+<div style="margin-top:10px;font-size:15px;color:#64748b;line-height:1.6;text-align:center;">
+  ✅ All necessary tracks, LED drivers, and connection cables are automatically included in this quote — no additional parts need to be purchased for installation.
+</div>
+<div style="margin-top:10px;font-size:16px;color:#2563eb;font-weight:700;line-height:1.6;text-align:center;">
+  📐 Once your order is placed, we will provide a detailed electrical wiring diagram to guide you through the installation.
 </div>
 <div class="submit-section">
 <button class="btn btn-primary" id="btnSubmit" style="padding:14px 40px;font-size:16px;">Submit Quote Request</button>
 <div class="submit-note">📧 The quote will be sent to your email for your reference.</div>
+<div style="margin-top:14px;padding-top:14px;border-top:1px solid #e9edf2;font-size:13px;color:#475569;text-align:center;">
+  <span style="color:#2563eb;font-weight:700;">🛡️ 3-Year Limited Warranty</span>
+  <span style="color:#cbd5e1;padding:0 8px;">|</span>
+  <span style="color:#2563eb;font-weight:700;">🔧 Modular Components</span>
+  <span style="color:#cbd5e1;padding:0 8px;">|</span>
+  <span style="color:#2563eb;font-weight:700;">📞 Dedicated Support</span>
+</div>
 </div>
 </div>
 </div>
@@ -631,11 +646,19 @@ function generateQuoteText() {
     } else {
         text += '  Installation Service:  Not Included\n';
     }
-    text += '\n' + line + '\n';
+      text += '\n' + line + '\n';
     text += '  GRAND TOTAL:           $' + grandTotal.toFixed(2) + '\n';
     text += line + '\n\n';
+    text += '  All necessary tracks, LED drivers, and connection cables are\n';
+    text += '  automatically included in this quote - no additional parts\n';
+    text += '  need to be purchased for installation.\n\n';
+    text += '  Once your order is placed, we will provide a detailed\n';
+    text += '  electrical wiring diagram to guide you through the installation.\n\n';
     text += '  Thank you for your business!\n';
-    text += '  For questions, please contact ' + MY_EMAIL + '\n';
+    text += '  For questions, please contact ' + MY_EMAIL + '\n\n';
+    text += '  -------------------------------------------------------\n';
+    text += '  [ 3-Year Limited Warranty | Modular Components | Support ]\n';
+    text += '  -------------------------------------------------------\n\n';
     text += '  Titatec Lighting | Professional LED lighting for retail shelving\n';
     return text;
 }
@@ -701,9 +724,21 @@ function generateQuoteHtml() {
     var html = '';
     html += '<div style="font-family:Arial,Helvetica,sans-serif;max-width:720px;margin:0 auto;color:#1e293b;">';
 
-    html += '<div style="background:#2563eb;color:#ffffff;padding:24px 28px;border-radius:12px 12px 0 0;">';
-    html += '<div style="font-size:20px;font-weight:700;letter-spacing:1px;">TITATEC LIGHTING</div>';
-    html += '<div style="font-size:13px;opacity:0.9;margin-top:4px;letter-spacing:2px;">OFFICIAL QUOTE</div>';
+       html += '<div style="background:#ffffff;padding:10px 32px;border-radius:12px 12px 0 0;border:1px solid #e5ebf3;border-bottom:none;">';
+    html += '<table style="width:100%;border-collapse:collapse;"><tr>';
+    html += '<td style="vertical-align:middle;">';
+    html += '<table style="border-collapse:collapse;"><tr>';
+    html += '<td style="vertical-align:middle;padding-right:14px;">';
+    html += '<img src="https://gondolalights.com/TITATEC-logo-400.png" alt="Titatec Lighting" style="height:72px;display:block;max-width:240px;" />';
+    html += '</td>';
+    html += '<td style="vertical-align:middle;border-left:1px solid #e5ebf3;padding-left:14px;">';
+    html += '<div style="font-size:16px;font-weight:700;color:#0f172a;letter-spacing:1.5px;line-height:1.2;">TITATEC LIGHTING</div>';
+    html += '<div style="font-size:11px;color:#64748b;letter-spacing:2px;margin-top:4px;">PROFESSIONAL LED LIGHTING</div>';
+    html += '</td>';
+    html += '</tr></table>';
+    html += '</td>';
+    html += '<td style="text-align:right;vertical-align:middle;color:#2563eb;font-size:13px;letter-spacing:3px;font-weight:700;">OFFICIAL QUOTE</td>';
+    html += '</tr></table>';
     html += '</div>';
 
     html += '<div style="padding:20px 28px;background:#f8fafc;border:1px solid #e5ebf3;border-top:none;">';
@@ -739,16 +774,37 @@ function generateQuoteHtml() {
     html += '</table>';
     html += '</div>';
 
-    html += '<div style="padding:20px 28px;background:#2563eb;color:#ffffff;border-radius:0 0 12px 12px;">';
+    html += '<div style="padding:12px 28px;background:#2563eb;color:#ffffff;border-radius:0 0 12px 12px;">';
     html += '<table style="width:100%;border-collapse:collapse;"><tr>';
     html += '<td style="font-size:14px;font-weight:600;letter-spacing:0.5px;color:#ffffff;">GRAND TOTAL</td>';
     html += '<td style="font-size:26px;font-weight:800;text-align:right;color:#ffffff;">$' + grandTotal.toFixed(2) + '</td>';
     html += '</tr></table>';
     html += '</div>';
-
-    html += '<div style="padding:18px 28px;text-align:center;font-size:12px;color:#94a3b8;">';
+    html += '<div style="margin-top:10px;font-size:15px;color:#64748b;line-height:1.6;text-align:center;">';
+    html += '✅ All necessary tracks, LED drivers, and connection cables are automatically included in this quote — no additional parts need to be purchased for installation.';
+    html += '</div>';
+    html += '<div style="margin-top:10px;font-size:16px;color:#2563eb;font-weight:700;line-height:1.6;text-align:center;">';
+    html += '📐 Once your order is placed, we will provide a detailed electrical wiring diagram to guide you through the installation.';
+    html += '</div>';
+        // 页脚：感谢 + 联系方式
+    html += '<div style="padding:18px 28px 12px;text-align:center;font-size:12px;color:#94a3b8;">';
     html += 'Thank you for your business!<br>';
-    html += 'For questions, please contact <a href="mailto:' + MY_EMAIL + '" style="color:#2563eb;text-decoration:none;">' + MY_EMAIL + '</a><br>';
+    html += 'For questions, please contact <a href="mailto:' + MY_EMAIL + '" style="color:#2563eb;text-decoration:none;">' + MY_EMAIL + '</a>';
+    html += '</div>';
+
+    // 品牌承诺区（质保 + 模块化 + 售后）
+    html += '<div style="padding:16px 28px;text-align:center;background:#f8fafc;border-top:1px solid #e5ebf3;">';
+    html += '<span style="color:#2563eb;font-weight:700;font-size:12px;">🛡️ 3-Year Limited Warranty</span>';
+    html += '<span style="color:#cbd5e1;padding:0 8px;">|</span>';
+    html += '<span style="color:#2563eb;font-weight:700;font-size:12px;">🔧 Modular Components</span>';
+    html += '<span style="color:#cbd5e1;padding:0 8px;">|</span>';
+    html += '<span style="color:#2563eb;font-weight:700;font-size:12px;">📞 Dedicated Support</span>';
+    html += '<br>';
+    html += '<span style="font-size:11px;color:#94a3b8;margin-top:6px;display:inline-block;">3-Year limited warranty on LED bars and drivers. Modular design for easy field replacement.</span>';
+    html += '</div>';
+
+    // 品牌标语
+    html += '<div style="padding:14px 28px;text-align:center;font-size:12px;color:#94a3b8;">';
     html += 'Titatec Lighting | Professional LED lighting for retail shelving';
     html += '</div>';
 
