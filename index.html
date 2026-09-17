@@ -3,11 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="https://gondolalights.com/favicon.svg" type="image/svg+xml">
 <title>Titatec Lighting - Quote Estimator</title>
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; }
-body { font-family: 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif; background: #f4f7fc; min-height: 100vh; display: flex; justify-content: center; padding: 30px 20px; color: #1e293b; }
-.app-container { max-width: 1000px; width: 100%; background: #ffffff; border-radius: 24px; box-shadow: 0 20px 60px rgba(0,20,40,0.08); padding: 36px 40px 44px; border: 1px solid #eef2f6; }
+body { font-family: 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif; background: #f4f7fc; min-height: 100vh; color: #1e293b; }
+.app-container { max-width: 1000px; width: calc(100% - 40px); margin: 30px auto; background: #ffffff; border-radius: 24px; box-shadow: 0 20px 60px rgba(0,20,40,0.08); padding: 36px 40px 44px; border: 1px solid #eef2f6; }
 .header { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; margin-bottom: 28px; border-bottom: 2px solid #eef2f6; padding-bottom: 18px; }
 .header h1 { font-size: 24px; font-weight: 700; color: #0f172a; }
 .header h1 span { background: #2563eb; color: #fff; font-size: 14px; font-weight: 600; padding: 2px 14px; border-radius: 40px; margin-left: 8px; }
@@ -50,6 +51,15 @@ body { font-family: 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif; ba
 .shelf-item .shelf-field input[type="number"] { border: 1.5px solid #dce1e8; border-radius: 6px; padding: 4px 8px; width: 70px; font-size: 14px; font-weight: 500; outline: none; text-align: center; }
 .row-subtotal { display: flex; justify-content: flex-end; align-items: center; gap: 8px; padding-top: 10px; margin-top: 4px; border-top: 1px dashed #e2e8f0; font-size: 14px; font-weight: 600; color: #0f172a; }
 .row-subtotal .subtotal-value { color: #2563eb; font-size: 16px; }
+.row-subtotal-note {
+  text-align: right;
+  font-size: 12px;
+  color: #2563eb;
+  font-weight: 500;
+  padding-right: 2px;
+  margin-top: 4px;
+  margin-bottom: 8px;
+}
 .grand-total { background: #f1f5f9; border-radius: 16px; padding: 20px 24px; margin-top: 8px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; border: 1px solid #e2e8f0; }
 .grand-total .gt-label { font-size: 15px; font-weight: 600; color: #475569; }
 .grand-total .gt-label { font-size: 20px; font-weight: 700; color: #dc2626; letter-spacing: 0.5px; }
@@ -79,13 +89,42 @@ body { font-family: 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif; ba
 .submit-section { text-align: center; }
 .modal-box { padding: 24px 20px; }
 }
+/* ============ 页脚（和主页一致） ============ */
+:root {
+  --accent: #D7A63A;
+  --font-mono: 'IBM Plex Mono', 'Courier New', monospace;
+}
+.site-footer{background:#E8E8E8 !important;color:#2D3748;padding:70px 0 30px;margin-top:60px}
+.site-footer .container{max-width:1280px;margin:0 auto;padding:0 32px}
+.site-footer .footer-grid{display:grid;grid-template-columns:1.7fr 1fr 1fr 1fr 1.1fr;gap:36px;margin-bottom:46px}
+.site-footer .footer-brand .brand{display:block;margin-bottom:16px;text-decoration:none}
+.site-footer .footer-brand p{font-size:.88rem;max-width:320px;color:#2D3748;line-height:1.6}
+.site-footer .socials{display:flex;gap:22px;margin-top:20px}
+.site-footer .socials a{width:52px;height:52px;border-radius:8px;border:1px solid rgba(0,0,0,.18);display:flex;align-items:center;justify-content:center;color:#2D3748;text-decoration:none;transition:all .2s ease}
+.site-footer .socials a:hover{border-color:var(--accent);color:var(--accent);transform:translateY(-3px)}
+.site-footer .socials svg{width:26px;height:26px}
+.site-footer .footer-col h4{font-family:var(--font-mono);font-size:14px;letter-spacing:.12em;text-transform:uppercase;color:#1A202C;margin-bottom:16px}
+.site-footer .footer-col a{display:block;font-size:.88rem;padding:4px 0;color:#2D3748;text-decoration:none;transition:color .2s ease}
+.site-footer .footer-col a:hover{color:var(--accent)}
+.site-footer .footer-bottom{border-top:1px solid rgba(0,0,0,.12);padding-top:24px;display:flex;flex-direction:column;gap:8px;font-size:.76rem;color:#4A5568}
+.site-footer .footer-bottom .legal-note{color:#2D3748}
+@media (max-width:980px){
+  .site-footer .footer-grid{grid-template-columns:1fr 1fr}
+}
+@media (max-width:760px){
+  .site-footer .footer-grid{grid-template-columns:1fr}
+  .site-footer .container{padding:0 20px}
+}
 </style>
 </head>
 <body>
 <div class="app-container" id="app">
 <header class="header">
 <h1>Titatec Lighting <span>Quote Estimator</span></h1>
-<div style="font-size:18px;color:#64748b;font-weight:500;letter-spacing:0.5px;">Professional LED Lighting for Retail Shelving</div>
+<div style="display:flex;align-items:center;gap:24px;flex-wrap:wrap;">
+  <div style="font-size:18px;color:#64748b;font-weight:500;letter-spacing:0.5px;">Professional LED Lighting for Retail Shelving</div>
+  <a href="https://gondolalights.com" style="font-size:14px;color:#2563eb;text-decoration:none;font-weight:600;white-space:nowrap;">← Back to Home</a>
+</div>
 </header>
 <div class="store-section" id="storeSection">
 <label for="storeName">Store Name:</label>
@@ -105,6 +144,7 @@ body { font-family: 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif; ba
 <div id="rowsContainer"></div>
 <div style="margin-top:16px;"><button class="btn btn-secondary" id="btnAddRow">+ Add Row</button></div>
 <div class="grand-total">
+    <div id="discountLine" style="display:none;font-size:20px;color:#2563eb;font-weight:800;white-space:nowrap;"></div>
   <div class="gt-label">Grand Total</div>
   <div class="gt-value"><span class="currency">$</span><span id="grandTotal">0.00</span></div>
 </div>
@@ -328,21 +368,277 @@ function deleteShelf(rowId, shelfId) {
 /* ============================================================
    计算：lightLength = length * levels
    ============================================================ */
-function calcShelf(shelf) {
-    var lightLength = shelf.length * shelf.levels;
-    var subtotal = lightLength * UNIT_PRICE;
-    return { lightLength: lightLength, subtotal: subtotal };
+/* ============================================================
+   报价常量
+   ============================================================ */
+var PRICE = {
+  lightBar: { '30': 22, '36': 24, '40': 27, '48': 29 },
+  track: 20,
+  driver: { '50W': 39.99, '80W': 69.99, '220W': 79.99, '320W': 99.99 },
+  extension: 16.99,
+  acPlug: 19.99
+};
+
+/* ============================================================
+   辅助函数
+   ============================================================ */
+function emptyBOM() {
+  return { tracks: 0, drivers: {}, ac: 0, extensions: 0 };
 }
+
+function mergeBOM() {
+  var result = emptyBOM();
+  for (var i = 0; i < arguments.length; i++) {
+    var b = arguments[i];
+    result.tracks += b.tracks;
+    result.ac += b.ac;
+    result.extensions += b.extensions;
+    for (var w in b.drivers) {
+      result.drivers[w] = (result.drivers[w] || 0) + b.drivers[w];
+    }
+  }
+  return result;
+}
+
+function lightBarTotal(shelves) {
+  var total = 0;
+  for (var i = 0; i < shelves.length; i++) {
+    var s = shelves[i];
+    var unit = PRICE.lightBar[String(s.length)] || 24;
+    total += unit * s.levels;
+  }
+  return total;
+}
+
+function totalBars(shelves) {
+  var total = 0;
+  for (var i = 0; i < shelves.length; i++) {
+    total += shelves[i].levels;
+  }
+  return total;
+}
+
+/* ============================================================
+   规则 1-2：单组 shelf
+   ============================================================ */
+function rule1or2(shelf) {
+  var bom = emptyBOM();
+  if (shelf.levels <= 4) {
+    bom.tracks = 1;
+    bom.drivers['50W'] = 1;
+  } else {
+    bom.tracks = 1;
+    bom.drivers['80W'] = 1;
+  }
+  bom.ac = 1;
+  return bom;
+}
+
+/* ============================================================
+   规则 3：2 组 shelf
+   ============================================================ */
+function rule3(shelves) {
+  var bom = mergeBOM(rule1or2(shelves[0]), rule1or2(shelves[1]));
+  bom.extensions = 1;
+  return bom;
+}
+
+/* ============================================================
+   规则 4：3 组 shelf
+   ============================================================ */
+function rule4(shelves) {
+  var bars = totalBars(shelves);
+  var bom = emptyBOM();
+  bom.tracks = 2;
+  bom.ac = 1;
+  if (bars <= 8) {
+    bom.drivers['80W'] = 1;
+  } else {
+    bom.drivers['220W'] = 1;
+  }
+  return bom;
+}
+
+/* ============================================================
+   规则 5：4 组 shelf
+   ============================================================ */
+function rule5(shelves) {
+  var bars = totalBars(shelves);
+  var bom = emptyBOM();
+  bom.tracks = 2;
+  bom.ac = 1;
+  if (bars <= 16) {
+    bom.drivers['220W'] = 1;
+  } else {
+    bom.drivers['320W'] = 1;
+  }
+  return bom;
+}
+
+/* ============================================================
+   规则 6：5 组 shelf
+   ============================================================ */
+function rule6(shelves) {
+  var bars = totalBars(shelves);
+  var bom = emptyBOM();
+  bom.ac = 1;
+  if (bars <= 20) {
+    bom.tracks = 2;
+    bom.drivers['220W'] = 1;
+  } else if (bars <= 32) {
+    bom.tracks = 2;
+    bom.drivers['320W'] = 1;
+  } else {
+    bom.tracks = 4;
+    bom.drivers['320W'] = 1;
+    bom.drivers['80W'] = 1;
+  }
+  return bom;
+}
+
+/* ============================================================
+   规则 7：6 组 shelf
+   ============================================================ */
+function rule7(shelves) {
+  var bom = mergeBOM(rule6(shelves.slice(0, 5)), rule1or2(shelves[5]));
+  bom.extensions = 1;
+  return bom;
+}
+
+/* ============================================================
+   规则 8：7 组 shelf
+   ============================================================ */
+function rule8(shelves) {
+  var bom = mergeBOM(rule6(shelves.slice(0, 5)), rule3(shelves.slice(5)));
+  bom.extensions += 1;
+  return bom;
+}
+
+/* ============================================================
+   规则 9：8 组 shelf
+   ============================================================ */
+function rule9(shelves) {
+  var bom = mergeBOM(rule6(shelves.slice(0, 5)), rule4(shelves.slice(5)));
+  bom.extensions += 2;
+  return bom;
+}
+
+/* ============================================================
+   规则 10：9 组 shelf
+   ============================================================ */
+function rule10(shelves) {
+  return mergeBOM(rule6(shelves.slice(0, 5)), rule5(shelves.slice(5)));
+}
+
+/* ============================================================
+   规则 11-19：10-18 组
+   ============================================================ */
+function rule11(shelves) {
+  return mergeBOM(rule6(shelves.slice(0, 5)), rule6(shelves.slice(5)));
+}
+function rule12(shelves) {
+  return mergeBOM(rule7(shelves.slice(0, 6)), rule6(shelves.slice(6)));
+}
+function rule13(shelves) {
+  return mergeBOM(rule7(shelves.slice(0, 6)), rule7(shelves.slice(6)));
+}
+function rule14(shelves) {
+  return mergeBOM(rule7(shelves.slice(0, 6)), rule8(shelves.slice(6)));
+}
+function rule15(shelves) {
+  return mergeBOM(rule8(shelves.slice(0, 7)), rule8(shelves.slice(7)));
+}
+function rule16(shelves) {
+  return mergeBOM(rule8(shelves.slice(0, 7)), rule9(shelves.slice(7)));
+}
+function rule17(shelves) {
+  return mergeBOM(rule9(shelves.slice(0, 8)), rule9(shelves.slice(8)));
+}
+function rule18(shelves) {
+  return mergeBOM(rule9(shelves.slice(0, 8)), rule10(shelves.slice(8)));
+}
+function rule19(shelves) {
+  return mergeBOM(rule10(shelves.slice(0, 9)), rule10(shelves.slice(9)));
+}
+
+/* ============================================================
+   主入口
+   ============================================================ */
+function calcRowBOM(shelves) {
+  var n = shelves.length;
+  if (n === 1) return rule1or2(shelves[0]);
+  if (n === 2) return rule3(shelves);
+  if (n === 3) return rule4(shelves);
+  if (n === 4) return rule5(shelves);
+  if (n === 5) return rule6(shelves);
+  if (n === 6) return rule7(shelves);
+  if (n === 7) return rule8(shelves);
+  if (n === 8) return rule9(shelves);
+  if (n === 9) return rule10(shelves);
+  if (n === 10) return rule11(shelves);
+  if (n === 11) return rule12(shelves);
+  if (n === 12) return rule13(shelves);
+  if (n === 13) return rule14(shelves);
+  if (n === 14) return rule15(shelves);
+  if (n === 15) return rule16(shelves);
+  if (n === 16) return rule17(shelves);
+  if (n === 17) return rule18(shelves);
+  if (n === 18) return rule19(shelves);
+  return null;
+}
+
+/* ============================================================
+   Row 小计
+   ============================================================ */
 function calcRowSubtotal(row) {
-    var s = 0;
-    for (var i = 0; i < row.shelves.length; i++) s += calcShelf(row.shelves[i]).subtotal;
-    return s;
+  var shelves = row.shelves;
+  if (shelves.length >= 19) return 0;
+  if (shelves.length === 0) return 0;
+
+  var bars = lightBarTotal(shelves);
+  var bom = calcRowBOM(shelves);
+  if (!bom) return 0;
+
+  var total = bars;
+  total += bom.tracks * PRICE.track;
+  for (var w in bom.drivers) {
+    total += bom.drivers[w] * PRICE.driver[w];
+  }
+  total += bom.ac * PRICE.acPlug;
+  total += bom.extensions * PRICE.extension;
+
+  return total;
 }
+
+/* ============================================================
+   Grand Total（含折扣）
+   ============================================================ */
 function calcGrandTotal() {
-    var t = 0;
-    for (var i = 0; i < rows.length; i++) t += calcRowSubtotal(rows[i]);
-    if (needInstallCheckbox.checked) t += parseFloat(installFeeInput.value) || 0;
-    return t;
+  var subtotal = 0;
+  for (var i = 0; i < rows.length; i++) {
+    subtotal += calcRowSubtotal(rows[i]);
+  }
+
+  var installFee = 0;
+  if (needInstallCheckbox.checked) {
+    installFee = parseFloat(installFeeInput.value) || 0;
+  }
+
+  var discountPct = 0;
+  if (subtotal >= 1000 && subtotal <= 1499) { discountPct = 0.05; }
+  else if (subtotal >= 1500 && subtotal <= 1999) { discountPct = 0.07; }
+  else if (subtotal >= 2000 && subtotal <= 2999) { discountPct = 0.09; }
+
+  var discount = subtotal * discountPct;
+  var final = subtotal - discount + installFee;
+
+  return {
+    subtotal: subtotal,
+    discountPct: discountPct,
+    discount: discount,
+    installFee: installFee,
+    final: final
+  };
 }
 
 /* ============================================================
@@ -406,8 +702,9 @@ function renderRows() {
             html += '<button class="btn btn-danger" data-delete-shelf="' + shelf.id + '" data-row-id="' + row.id + '" title="Delete Shelf">X</button>';
             html += '</div>';
         }
-        html += '</div><div class="row-subtotal"><span>Row Subtotal:</span>';
-        html += '<span class="subtotal-value">$' + rowSubtotal.toFixed(2) + '</span></div></div>';
+           html += '</div><div class="row-subtotal"><span>Row Subtotal:</span>';
+           html += '<span class="subtotal-value">$' + rowSubtotal.toFixed(2) + '</span></div>';
+           html += '<div class="row-subtotal-note">(including power tracks, LED drivers, AC plug and all accessories)</div></div>';
     }
     rowsContainer.innerHTML = html;
     bindEvents();
@@ -494,7 +791,20 @@ function bindEvents() {
     }
 }
 
-function renderGrandTotal() { grandTotalEl.textContent = calcGrandTotal().toFixed(2); }
+function renderGrandTotal() {
+  var gt = calcGrandTotal();
+  grandTotalEl.textContent = gt.final.toFixed(2);
+  
+  var discountEl = document.getElementById('discountLine');
+  if (discountEl) {
+    if (gt.discountPct > 0) {
+      discountEl.style.display = 'block';
+      discountEl.innerHTML = 'Discount (' + (gt.discountPct * 100) + '%): -$' + gt.discount.toFixed(2);
+    } else {
+      discountEl.style.display = 'none';
+    }
+  }
+}
 
 /* ============================================================
    全局事件
@@ -620,16 +930,15 @@ function generateQuoteText() {
         text += '  ' + row.name + '\n';
         text += '  ' + dash.substring(0, row.name.length + 4) + '\n';
 
-        for (var s = 0; s < row.shelves.length; s++) {
-            var shelf = row.shelves[s];
-            var result = calcShelf(shelf);
-            totalShelves += shelf.levels;
-            text += '    ' + shelf.name + '\n';
-            text += '      Length:     ' + shelf.length + ' inch\n';
-            text += '      Levels:     ' + shelf.levels + '\n';
-            text += '      Subtotal:   $' + result.subtotal.toFixed(2) + '\n\n';
-        }
-        text += '  ' + row.name + ' Subtotal: $' + rowSubtotal.toFixed(2) + '\n\n';
+      for (var s = 0; s < row.shelves.length; s++) {
+      var shelf = row.shelves[s];
+      totalShelves += shelf.levels;
+        text += '    ' + shelf.name + '\n';
+        text += '      Length:     ' + shelf.length + ' inch\n';
+        text += '      Levels:     ' + shelf.levels + '\n\n';
+}
+      text += '  ' + row.name + ' Subtotal: $' + rowSubtotal.toFixed(2) + '\n';
+      text += '    (including power tracks, LED drivers, AC plug and all accessories)\n\n';
     }
 
     var installChecked = needInstallCheckbox.checked;
@@ -685,28 +994,30 @@ function generateQuoteHtml() {
         var rowSubtotal = calcRowSubtotal(row);
         grandTotal += rowSubtotal;
 
-        for (var s = 0; s < row.shelves.length; s++) {
-            var shelf = row.shelves[s];
-            var result = calcShelf(shelf);
-            totalShelves += shelf.levels;
+       for (var s = 0; s < row.shelves.length; s++) {
+     var shelf = row.shelves[s];
+      totalShelves += shelf.levels;
 
-            var rowLabel = (s === 0) ? esc(row.name) : '';
-            var rowLabelCell = rowLabel
-                ? '<td style="' + tdStyle + 'font-weight:600;color:#2563eb;vertical-align:top;">' + rowLabel + '</td>'
-                : '<td style="' + tdMuted + 'vertical-align:top;"></td>';
+     var rowLabel = (s === 0) ? esc(row.name) : '';
+     var rowLabelCell = rowLabel
+     ? '<td style="' + tdStyle + 'font-weight:600;color:#2563eb;vertical-align:top;">' + rowLabel + '</td>'
+     : '<td style="' + tdMuted + 'vertical-align:top;"></td>';
 
-            detailRows += '<tr>' +
-                rowLabelCell +
-                '<td style="' + tdStyle + '">' + esc(shelf.name) + '</td>' +
-                '<td style="' + tdRight + '">' + shelf.length + '&quot;</td>' +
-                '<td style="' + tdRight + '">' + shelf.levels + '</td>' +
-                '<td style="' + tdRight + '">$' + result.subtotal.toFixed(2) + '</td>' +
-            '</tr>';
-        }
+     detailRows += '<tr>' +
+      rowLabelCell +
+     '<td style="' + tdStyle + '">' + esc(shelf.name) + '</td>' +
+     '<td style="' + tdRight + '">' + shelf.length + '&quot;</td>' +
+     '<td style="' + tdRight + '">' + shelf.levels + '</td>' +
+     '<td style="' + tdRight + '">—</td>' +
+     '</tr>';
+    }
 
         detailRows += '<tr>' +
-            '<td colspan="4" style="' + subtotalLabel + '">' + esc(row.name) + ' Subtotal</td>' +
-            '<td style="' + subtotalTd + '">$' + rowSubtotal.toFixed(2) + '</td>' +
+        '<td colspan="4" style="' + subtotalLabel + '">' + esc(row.name) + ' Subtotal</td>' +
+        '<td style="' + subtotalTd + '">$' + rowSubtotal.toFixed(2) + '</td>' +
+        '</tr>' +
+        '<tr>' +
+        '<td colspan="5" style="padding:6px 12px;font-size:11px;color:#2563eb;text-align:right;border:1px solid #e5ebf3;border-top:none;background:#f1f5f9;">(including power tracks, LED drivers, AC plug and all accessories)</td>' +
         '</tr>';
     }
 
@@ -814,5 +1125,60 @@ function generateQuoteHtml() {
 
 console.log('Titatec Lighting Quote Estimator ready.');
 </script>
+<!-- ===== Footer ===== -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="https://gondolalights.com" class="brand" aria-label="TITATEC home">
+          <span class="brand-name" style="color:#D7A63A;font-size:32px;font-weight:bold;letter-spacing:1px;display:block;">TITATEC<span class="dot">.</span></span>
+          <span class="brand-sub" style="color:#7C8BA0;font-size:16px;letter-spacing:0.5px;">Gondola LED Lighting</span>
+        </a>
+        <p>TITATEC designs and supplies under-shelf LED lighting, backlit display systems, and digital display integration for retail gondola shelving — for supermarkets, convenience stores and specialty retailers.</p>
+        <div class="socials">
+          <a href="https://www.facebook.com/TITATEClights" aria-label="TITATEC on Facebook" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13.5 21v-7h2.4l.36-2.8H13.5V9.4c0-.81.22-1.36 1.38-1.36h1.48V5.55c-.26-.03-1.13-.11-2.15-.11-2.13 0-3.59 1.3-3.59 3.69v2.07H8.2V14h2.42v7h2.88z"/></svg></a>
+          <a href="https://www.instagram.com/gondolalights/" aria-label="TITATEC on Instagram" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1.1" fill="currentColor" stroke="none"/></svg></a>
+          <a href="https://www.youtube.com/@GondolaLights" aria-label="TITATEC on YouTube" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M21.6 7.2a2.6 2.6 0 00-1.83-1.84C18.18 5 12 5 12 5s-6.18 0-7.77.36A2.6 2.6 0 002.4 7.2 27 27 0 002 12a27 27 0 00.4 4.8 2.6 2.6 0 001.83 1.84C5.82 19 12 19 12 19s6.18 0 7.77-.36a2.6 2.6 0 001.83-1.84A27 27 0 0022 12a27 27 0 00-.4-4.8zM10 15.2V8.8l5.2 3.2L10 15.2z"/></svg></a>
+          <a href="https://www.tiktok.com/@gondola_lights?_r=1&_t=ZT-95kLuw42Vo5" aria-label="TITATEC on TikTok" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M16.6 3c.4 2.2 1.7 3.6 3.9 3.8v2.8c-1.4 0-2.7-.4-3.9-1.2v5.7c0 3.6-2.4 6.1-5.9 6.1A5.7 5.7 0 014.9 14.5c0-3.4 2.6-6 6-5.9v2.9a3 3 0 00-3 3 3 3 0 003 3c1.6 0 2.7-1.2 2.7-3V3h2z"/></svg></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>PRODUCTS</h4>
+        <a href="https://gondolalights.com/#p1">Under-Shelf LED Kits</a>
+        <a href="https://gondolalights.com/#p2">Backlit Display Panels</a>
+        <a href="https://gondolalights.com/#p3">LED + Digital Display</a>
+        <a href="https://gondolalights.com/#p4">Custom &amp; OEM Programs</a>
+        <a href="https://gondolalights.com/#new-arrival">New Arrival</a>
+      </div>
+      <div class="footer-col">
+        <h4>APPLICATIONS</h4>
+        <a href="https://gondolalights.com/#app1">Supermarkets &amp; Grocery</a>
+        <a href="https://gondolalights.com/#app2">Convenience &amp; C-Store</a>
+        <a href="https://gondolalights.com/#app3">Pharmacy &amp; Health</a>
+        <a href="https://gondolalights.com/#app4">Auto Parts &amp; Hardware</a>
+        <a href="https://gondolalights.com/#app5">Cosmetics &amp; Beauty</a>
+      </div>
+      <div class="footer-col">
+        <h4>COMPANY</h4>
+        <a href="https://gondolalights.com/#about">About TITATEC</a>
+        <a href="https://gondolalights.com/#about">Capabilities</a>
+        <a href="https://gondolalights.com/#contact">Contact &amp; Inquiries</a>
+        <a href="https://gondolalights.com/#contact">Wholesale &amp; OEM</a>
+      </div>
+      <div class="footer-col">
+        <h4>LEGAL</h4>
+        <a href="/privacy-policy.html">Privacy Policy</a>
+        <a href="/terms-of-service.html">Terms of Service</a>
+        <a href="/shipping-and-return.html">Shipping &amp; Return</a>
+        <a href="/warranty.html">Warranty Policy</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 TITATEC. Operated by Capitec Inc.</span>
+      <span class="legal-note">TITATEC&reg; is a registered trademark of Forthsemi Co., Ltd., used under license.</span>
+    </div>
+  </div>
+</footer>
+
 </body>
 </html>
